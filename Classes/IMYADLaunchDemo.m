@@ -16,6 +16,7 @@
 @end
 
 @implementation IMYADLaunchDemo
+///在load 方法中，启动监听，可以做到无注入
 + (void)load
 {
     [self shareInstance];
@@ -33,6 +34,9 @@
 {
     self = [super init];
     if (self) {
+        
+        ///如果是没啥经验的开发，请不要在初始化的代码里面做别的事，防止对主线程的卡顿，和 其他情况
+        
         ///应用启动, 首次开屏广告
         [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
             ///要等DidFinished方法结束后才能初始化UIWindow，不然会检测是否有rootViewController
@@ -63,17 +67,24 @@
 }
 - (void)show
 {
+    ///初始化一个Window， 做到对业务视图无干扰。
     UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    ///广告布局
     [self setupSubviews:window];
     
-    ///设置为最顶层，防止 Show AlertView 的覆盖
+    ///设置为最顶层，防止 AlertView 等弹窗的覆盖
     window.windowLevel = UIWindowLevelStatusBar + 1;
+    
+    ///默认为YES，当你设置为NO时，这个Window就会显示了
     window.hidden = NO;
-    window.alpha = 0;
+    
     ///来个渐显动画
+    window.alpha = 0;
     [UIView animateWithDuration:0.3 animations:^{
         window.alpha = 1;
     }];
+    
     ///防止释放，显示完后  要手动设置为 nil
     self.window = window;
 }
