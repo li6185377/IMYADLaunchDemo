@@ -40,9 +40,7 @@
         ///应用启动, 首次开屏广告
         [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
             ///要等DidFinished方法结束后才能初始化UIWindow，不然会检测是否有rootViewController
-            dispatch_async(dispatch_get_main_queue(), ^{
-               [self checkAD]; 
-            });
+            [self checkAD];
         }];
         ///进入后台
         [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
@@ -69,7 +67,8 @@
 {
     ///初始化一个Window， 做到对业务视图无干扰。
     UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
+    window.rootViewController = [UIViewController new];
+    window.rootViewController.view.backgroundColor = [UIColor clearColor];
     ///广告布局
     [self setupSubviews:window];
     
