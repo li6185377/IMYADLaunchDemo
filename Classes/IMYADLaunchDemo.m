@@ -77,12 +77,7 @@
     
     ///默认为YES，当你设置为NO时，这个Window就会显示了
     window.hidden = NO;
-    
-    ///来个渐显动画
-    window.alpha = 0;
-    [UIView animateWithDuration:0.3 animations:^{
-        window.alpha = 1;
-    }];
+    window.alpha = 1;
     
     ///防止释放，显示完后  要手动设置为 nil
     self.window = window;
