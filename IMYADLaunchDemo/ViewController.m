@@ -21,5 +21,9 @@
     
     self.view.backgroundColor = [UIColor orangeColor];
 }
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
 
 @end

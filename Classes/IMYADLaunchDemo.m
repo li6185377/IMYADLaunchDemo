@@ -69,6 +69,7 @@
     UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     window.rootViewController = [UIViewController new];
     window.rootViewController.view.backgroundColor = [UIColor clearColor];
+    window.rootViewController.view.userInteractionEnabled = NO;
     ///广告布局
     [self setupSubviews:window];
     

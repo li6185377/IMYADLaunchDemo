@@ -318,6 +318,7 @@
 				3614C2741D20B849003F73CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
